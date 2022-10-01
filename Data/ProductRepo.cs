@@ -11,15 +11,14 @@ public class ProductRepo: IProductRepo
     {
         _context = context;
     }
-    public async Task<IEnumerable<Product>> GetProductsByNameAsync(string name)
+    public async Task<List<Product>> GetProductsByNameAsync(string name)
     {
         name = name ?? String.Empty;
-
-        var list = await _context.Product.ToListAsync();
-
         var searchingName = name.Trim().ToLower();
 
-        return list.Where(c => c.Name.ToLower().Contains(searchingName));
+        return await _context.Product.AsQueryable()
+                .Where(c => c.Name.ToLower().Contains(searchingName))
+                .ToListAsync();
     }
 
     public async Task<Product?> GetProductByIdAsync(Guid id)

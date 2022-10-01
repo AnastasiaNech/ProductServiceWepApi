@@ -16,10 +16,10 @@ public class ProductBLL : IProductBLL
         _repo = repo;
     }
 
-    public async Task<IEnumerable<ProductReadDto>> GetProductsByNameAsync(string name)
+    public async Task<List<ProductReadDto>> GetProductsByNameAsync(string name)
     {
         var products = await _repo.GetProductsByNameAsync(name);
-        return _mapper.Map<IEnumerable<ProductReadDto>>(products);
+        return _mapper.Map<List<ProductReadDto>>(products);
     }
 
     public async Task<ProductReadDto> CreateAsync(ProductCreateDto obj)

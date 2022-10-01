@@ -21,11 +21,14 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+        app.UseSwagger();
+        app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+
+app.UseHttpsRedirection();//тоже middleware компонент
+
+app.UseRouting();//сопоставление запросов с конкретными адресами (маршрутизация)
 
 ProductEndPoints.AddEndpoints(app);
 
