@@ -9,7 +9,9 @@ public class ProductsProfile : Profile
     public ProductsProfile()
     {
         CreateMap<Product, ProductReadDto>();
-        CreateMap<ProductCreateDto, Product>();
+        CreateMap<ProductCreateDto, Product>()
+            .ForMember(dest => dest.ID,
+            opt => opt.MapFrom(src => Guid.NewGuid()));
         CreateMap<ProductUpdateDto, Product>();
     }
 }
